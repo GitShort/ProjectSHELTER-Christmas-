@@ -92,8 +92,8 @@ public class TopDownCharacterMover : MonoBehaviour
     IEnumerator TimeBetweenShots()
     {
         shotFired = true;
-        var shot = Instantiate(projectile, shootingPos.position, Quaternion.identity);
-        shot.GetComponent<Rigidbody>().AddRelativeForce(shootingPos.up * projectileSpeed, ForceMode.Impulse);
+        var shot = Instantiate(projectile, shootingPos.position, transform.rotation);
+        shot.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.up * projectileSpeed, ForceMode.Impulse);
         yield return new WaitForSeconds(shootingTimer);
         shotFired = false;
     }

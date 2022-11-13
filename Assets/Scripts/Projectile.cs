@@ -22,8 +22,8 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject explosion = Instantiate(projectileExplosion, transform.position - transform.position * VFXOffset, transform.rotation);
-        explosion.GetComponent<VisualEffect>().Play();
+        GameObject explosion = Instantiate(projectileExplosion, transform.position, transform.rotation);
+        explosion.GetComponentInChildren<VisualEffect>().Play();
         //AudioManager.instance.PlaySound("ProjectileExplode", explosion);
         Destroy(explosion, 3f);
         Destroy(this.gameObject);
