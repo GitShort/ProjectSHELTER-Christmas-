@@ -28,7 +28,16 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        EnemySpawnTime();
+        Debug.Log(GameManager.Instance.SpawnedEnemyCount);
+        if (GameManager.Instance.SpawnedEnemyCount <= GameManager.Instance.TargetEnemyCount)
+            foreach (var spawnPoint in _SpawnPoints)
+            {
+                if (!spawnPoint.gameObject.GetComponent<Renderer>().isVisible)
+                {
+                    EnemySpawnTime();
+                }
+            }
+
 
         if (_isTimerFinished)
         {
@@ -64,6 +73,8 @@ public class EnemySpawner : MonoBehaviour
         {
             _chosenSpawnPoint = rnd.Next(_SpawnPoints.Length);
             Instantiate(Enemies[i], GetRandomPosition(_chosenSpawnPoint), transform.rotation);
+            GameManager.Instance.SpawnedEnemyCount++;
+            GameManager.Instance.CurrentEnemyCount++;
         }
     }
 

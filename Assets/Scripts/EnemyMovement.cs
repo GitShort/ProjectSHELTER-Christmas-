@@ -31,6 +31,7 @@ public class EnemyMovement : MonoBehaviour
         currentEnemyHealth = enemyHealth - damage;
         if (currentEnemyHealth <= 0)
         {
+            GameManager.Instance.CurrentEnemyCount--;
             GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
             explosion.GetComponentInChildren<VisualEffect>().Play();
             //AudioManager.instance.PlaySound("ProjectileExplode", explosion);
