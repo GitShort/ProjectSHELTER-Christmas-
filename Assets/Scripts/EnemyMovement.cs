@@ -35,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
             GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
             explosion.GetComponentInChildren<VisualEffect>().Play();
             //AudioManager.instance.PlaySound("ProjectileExplode", explosion);
-            Destroy(explosion, 1.5f);
+            Destroy(explosion, 4f);
             Destroy(this.gameObject);
         }
     }
