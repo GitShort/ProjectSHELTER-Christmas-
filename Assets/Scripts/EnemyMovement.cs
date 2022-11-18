@@ -13,10 +13,17 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] GameObject deathVFX;
     [SerializeField] float damageToPlayer = 20f;
 
+    float defaultSpeed;
+    [SerializeField] float staggerTime = 0.125f;
+    [SerializeField] float staggerSpeed = 0.25f;
+    bool wasHit = false;
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        currentEnemyHealth = enemyHealth;
+        defaultSpeed = agent.speed;
     }
 
     // Update is called once per frame
@@ -28,7 +35,9 @@ public class EnemyMovement : MonoBehaviour
     public void EnemyHit(float damage)
     {
         Debug.Log("Damage");
-        currentEnemyHealth = enemyHealth - damage;
+        currentEnemyHealth = currentEnemyHealth - damage;
+        if (!wasHit)
+            StartCoroutine(GetHit());
         if (currentEnemyHealth <= 0)
         {
             GameManager.Instance.CurrentEnemyCount--;
@@ -46,5 +55,24 @@ public class EnemyMovement : MonoBehaviour
         {
             PlayerManager.Instance.AdjustPlayerHealth(-damageToPlayer, this.transform);
         }
+    }
+
+    public float GetRemainingDistanceToPlayer()
+    {
+        return agent.remainingDistance;
+    }
+
+    public float GetStoppingDistance()
+    {
+        return agent.stoppingDistance;
+    }
+
+    IEnumerator GetHit()
+    {
+        wasHit = true;
+        agent.speed = staggerSpeed;
+        yield return new WaitForSeconds(staggerTime);
+        agent.speed = defaultSpeed;
+        wasHit = false;
     }
 }
