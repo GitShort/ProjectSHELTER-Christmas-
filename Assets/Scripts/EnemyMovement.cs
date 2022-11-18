@@ -67,6 +67,11 @@ public class EnemyMovement : MonoBehaviour
         return agent.stoppingDistance;
     }
 
+    public Vector3 GetCurrentVelocity()
+    {
+        return agent.velocity;
+    }
+
     IEnumerator GetHit()
     {
         wasHit = true;

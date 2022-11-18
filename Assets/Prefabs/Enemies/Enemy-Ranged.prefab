@@ -206,7 +206,7 @@ MonoBehaviour:
   projectile: {fileID: 3208555782826603893, guid: a5ff8d085e14e5041a62acffc5c37e69,
     type: 3}
   shootingPos: {fileID: 56281460}
-  projectileSpeed: 15
+  projectileSpeed: 10
   shootingTimer: 0.5
   shootingDistanceMultiplier: 1.1
 --- !u!1 &8158229371620497764
@@ -218,6 +218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8158229371620853060}
+  - component: {fileID: 228525295700729246}
   m_Layer: 7
   m_Name: 065 Deer
   m_TagString: Untagged
@@ -241,6 +242,26 @@ Transform:
   m_Father: {fileID: 709919346485769416}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &228525295700729246
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8158229371620497764}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: deb80beb474fe124dbadbc297f38faf8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8158229371620497782
 GameObject:
   m_ObjectHideFlags: 0

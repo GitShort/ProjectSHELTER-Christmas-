@@ -290,6 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2509756572103201069}
+  - component: {fileID: 5610961589955080738}
   m_Layer: 8
   m_Name: 061 Santa_claus
   m_TagString: Player
@@ -305,14 +306,35 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2509756572103494925}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2509756572103201087}
+  - {fileID: 5782664677810392179}
   m_Father: {fileID: 6131540878629710297}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5610961589955080738
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2509756572103494925}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98205e0627d541b4f832e0575992e9a1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2509756572103494943
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,7 +777,6 @@ Transform:
   - {fileID: 18170285}
   - {fileID: 2509756572103201069}
   - {fileID: 716685467108996671}
-  - {fileID: 5782664677810392179}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -981,8 +1002,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6560608098718193353}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.461, y: -0.284, z: -0.042}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.461, y: 0.71599996, z: -0.042}
   m_LocalScale: {x: 2.261176, y: 2.261176, z: 2.261176}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -992,8 +1013,8 @@ Transform:
   - {fileID: 2398654535111049893}
   - {fileID: 6782675814417370308}
   - {fileID: 5243738304062554470}
-  m_Father: {fileID: 6131540878629710297}
-  m_RootOrder: 5
+  m_Father: {fileID: 2509756572103201069}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6853199510590476272
 GameObject:

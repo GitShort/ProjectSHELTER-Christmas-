@@ -30,7 +30,9 @@ public class PlayerManager : MonoBehaviour
     float currentPlayerHealth;
     [SerializeField] float hitsCooldown = 1.5f;
     bool playerHit = false;
-    
+
+    Animator anim;
+
     public bool PlayerHit
     {
         get { return playerHit; }
@@ -55,15 +57,23 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
         currentPlayerHealth = playerHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         var targetVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
         var movementVector = MoveTowardTarget(targetVector);
+
+        if (_input.InputVector != new Vector2(0, 0))
+        {
+            anim.SetBool("IsWalking", true);
+        }
+        else
+            anim.SetBool("IsWalking", false);
+
 
         if (!RotateTowardMouse)
         {
@@ -102,12 +112,14 @@ public class PlayerManager : MonoBehaviour
     private Vector3 MoveTowardTarget(Vector3 targetVector)
     {
         var speed = MovementSpeed * Time.deltaTime;
+
         // transform.Translate(targetVector * (MovementSpeed * Time.deltaTime)); Demonstrate why this doesn't work
         //transform.Translate(targetVector * (MovementSpeed * Time.deltaTime), Camera.gameObject.transform);
 
         targetVector = Quaternion.Euler(0, Camera.gameObject.transform.rotation.eulerAngles.y, 0) * targetVector;
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
+
         return targetVector;
     }
 

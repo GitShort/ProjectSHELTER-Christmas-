@@ -13,6 +13,8 @@ public class EnemyRanged : MonoBehaviour
 
     EnemyMovement enemyMovement;
 
+    Animator anim;
+
     bool shotFired = true;
 
     // Start is called before the first frame update
@@ -20,15 +22,25 @@ public class EnemyRanged : MonoBehaviour
     {
         enemyMovement = GetComponent<EnemyMovement>();
         StartCoroutine(StopInitialShot());
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        transform.LookAt(PlayerManager.Instance.transform);
+
         if (enemyMovement.GetRemainingDistanceToPlayer() <= enemyMovement.GetStoppingDistance() * shootingDistanceMultiplier && !shotFired)
         {
             StartCoroutine(FireProjectile());
         }
+
+        if (enemyMovement.GetCurrentVelocity() != new Vector3(0, 0, 0))
+        {
+            anim.SetBool("IsRunning", true);
+        }
+        else
+            anim.SetBool("IsRunning", false);
     }
 
     IEnumerator FireProjectile()
@@ -36,6 +48,9 @@ public class EnemyRanged : MonoBehaviour
         shotFired = true;
         var shot = Instantiate(projectile, shootingPos.position, transform.rotation);
         shot.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.up * projectileSpeed, ForceMode.Impulse);
+
+
+
         yield return new WaitForSeconds(shootingTimer);
         shotFired = false;
     }

@@ -13,7 +13,7 @@ public class InputHandler : MonoBehaviour
         var h = Input.GetAxis("Horizontal");
         var v = Input.GetAxis("Vertical");
         InputVector = new Vector2(h, v);
-
+        Debug.Log(InputVector);
         MousePosition = Input.mousePosition;
     }
 }
