@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +17,9 @@ public class GameManager : MonoBehaviour
     int currentWave;
 
     bool isWaveStarted = true;
+
+    [SerializeField] TextMeshProUGUI playerHealth;
+    [SerializeField] TextMeshProUGUI score;
 
     public int CurrentEnemyCount
     {
@@ -31,6 +37,14 @@ public class GameManager : MonoBehaviour
     {
         get { return targetEnemyCount; }
         set { targetEnemyCount = value; }
+    }
+
+    int killedEnemyCount = 0;
+
+    public int KilledEnemyCount
+    {
+        get { return killedEnemyCount; }
+        set { killedEnemyCount = value; }
     }
 
     private void Awake()
@@ -63,6 +77,12 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(StartWave());
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(0);
+            Time.timeScale = 1;
+        }
     }
 
     IEnumerator StartWave()
@@ -80,5 +100,10 @@ public class GameManager : MonoBehaviour
         targetEnemyCount = 150;
     }
 
+    public void UpdateUI()
+    {
+        playerHealth.text = PlayerManager.Instance.CurrentPlayerHealth.ToString();
+        score.text = killedEnemyCount.ToString();
+    }
 
 }

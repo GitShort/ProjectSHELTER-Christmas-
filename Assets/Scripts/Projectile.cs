@@ -11,9 +11,12 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] string projectileType;
 
+    VisualEffect projectileVFX;
+
     // Start is called before the first frame update
     void Start()
     {
+        projectileVFX = GetComponentInChildren<VisualEffect>();
     }
 
     // Update is called once per frame
@@ -31,13 +34,13 @@ public class Projectile : MonoBehaviour
 
         if (other.gameObject.tag.Equals("Player") && projectileType.Equals("EnemyProjectile"))
         {
-            Debug.Log("Player HIT");
+            PlayerManager.Instance.AdjustPlayerHealth(-projectileDamage * 10f, this.transform);
         }
 
         GameObject explosion = Instantiate(projectileExplosion, transform.position, transform.rotation);
         explosion.GetComponentInChildren<VisualEffect>().Play();
         //AudioManager.instance.PlaySound("ProjectileExplode", explosion);
         Destroy(explosion, 1.5f);
-        Destroy(this.gameObject);
+        Destroy(this.gameObject );
     }
 }

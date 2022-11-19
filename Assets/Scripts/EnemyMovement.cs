@@ -18,6 +18,9 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float staggerSpeed = 0.25f;
     bool wasHit = false;
 
+    //enum enemyType { Generic, Ranged, Fast, Tank};
+    //[SerializeField] enemyType type;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,9 @@ public class EnemyMovement : MonoBehaviour
         if (currentEnemyHealth <= 0)
         {
             GameManager.Instance.CurrentEnemyCount--;
+            GameManager.Instance.KilledEnemyCount++;
+            GameManager.Instance.UpdateUI();
+
             GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
             explosion.GetComponentInChildren<VisualEffect>().Play();
             //AudioManager.instance.PlaySound("ProjectileExplode", explosion);

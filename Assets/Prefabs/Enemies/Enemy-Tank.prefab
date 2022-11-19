@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6086438895594295839}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 8.675293, y: 1.0000014, z: 29.015297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -114,9 +114,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 2
 --- !u!195 &6086438895594295815
 NavMeshAgent:
@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6645adf4b4d755644959e64e034dd34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 30
-  deathVFX: {fileID: 2802266773793000470, guid: c74c808e8054b2845b5bd991fd245c9b,
+  enemyHealth: 2
+  deathVFX: {fileID: 2802266773793000470, guid: 62d49111696c309498813d8485778461,
     type: 3}
   damageToPlayer: 20
   staggerTime: 0.5

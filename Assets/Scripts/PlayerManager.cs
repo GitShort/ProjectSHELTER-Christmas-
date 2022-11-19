@@ -38,6 +38,11 @@ public class PlayerManager : MonoBehaviour
         get { return playerHit; }
     }
 
+    public float CurrentPlayerHealth
+    {
+        get { return currentPlayerHealth; }  
+    }
+
     public static PlayerManager Instance { get; private set; }
 
     private void Awake()
@@ -157,7 +162,7 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log("YOU LOSE");
             }
         }
-        
+        GameManager.Instance.UpdateUI();
     }
 
     IEnumerator TimeBetweenHits()
