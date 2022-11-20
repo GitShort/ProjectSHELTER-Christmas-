@@ -69,8 +69,6 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var targetVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
-        var movementVector = MoveTowardTarget(targetVector);
 
         if (_input.InputVector != new Vector2(0, 0))
         {
@@ -79,21 +77,26 @@ public class PlayerManager : MonoBehaviour
         else
             anim.SetBool("IsWalking", false);
 
-
-        if (!RotateTowardMouse)
-        {
-            RotateTowardMovementVector(movementVector);
-        }
-        if (RotateTowardMouse)
-        {
-            RotateFromMouseVector();
-        }
-
         if (Input.GetMouseButton(0))
         {
             ShootProjectile();
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+        var targetVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
+        var movementVector = MoveTowardTarget(targetVector);
+
+        //if (!RotateTowardMouse)
+        //{
+        //    RotateTowardMovementVector(movementVector);
+        //}
+        if (RotateTowardMouse)
+        {
+            RotateFromMouseVector();
+        }
     }
 
     void ShootProjectile()
@@ -114,16 +117,20 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    // TODO later: Optimize walking into walls
     private Vector3 MoveTowardTarget(Vector3 targetVector)
     {
-        var speed = MovementSpeed * Time.deltaTime;
+        var speed = MovementSpeed * Time.fixedDeltaTime;
 
-        // transform.Translate(targetVector * (MovementSpeed * Time.deltaTime)); Demonstrate why this doesn't work
-        //transform.Translate(targetVector * (MovementSpeed * Time.deltaTime), Camera.gameObject.transform);
+        bool rhit = Physics.Raycast(transform.position, targetVector, speed);
+        if (!rhit)
+        {
+            targetVector = Quaternion.Euler(0, Camera.gameObject.transform.rotation.eulerAngles.y, 0) * targetVector;
+            var targetPosition = transform.position + targetVector * speed;
+            transform.position = targetPosition;
+        }
 
-        targetVector = Quaternion.Euler(0, Camera.gameObject.transform.rotation.eulerAngles.y, 0) * targetVector;
-        var targetPosition = transform.position + targetVector * speed;
-        transform.position = targetPosition;
+        targetVector = Vector3.Normalize(targetVector);
 
         return targetVector;
     }
