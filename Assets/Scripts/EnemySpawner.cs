@@ -28,7 +28,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(GameManager.Instance.SpawnedEnemyCount);
         if (GameManager.Instance.SpawnedEnemyCount <= GameManager.Instance.TargetEnemyCount)
             foreach (var spawnPoint in _SpawnPoints)
             {

@@ -33,6 +33,8 @@ public class PlayerManager : MonoBehaviour
 
     Animator anim;
 
+    KnockbackFeedback knockback;
+
     public bool PlayerHit
     {
         get { return playerHit; }
@@ -63,6 +65,7 @@ public class PlayerManager : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
+        knockback = GetComponent<KnockbackFeedback>();
         currentPlayerHealth = playerHealth;
     }
 
@@ -158,8 +161,9 @@ public class PlayerManager : MonoBehaviour
             currentPlayerHealth = currentPlayerHealth + value;
             if (value < 0)
             {
-                Vector3 moveDir = rb.transform.position - objPosition.position;
-                rb.AddForce(moveDir.normalized * 100f, ForceMode.Impulse);
+                //Vector3 moveDir = rb.transform.position - objPosition.position;
+                //rb.AddForce(moveDir.normalized * 100f, ForceMode.Impulse);
+                knockback.PlayFeedback(objPosition);
                 Debug.Log("PLAYER HIT for " + value + ", health = " + currentPlayerHealth);
                 StartCoroutine(TimeBetweenHits());
             }

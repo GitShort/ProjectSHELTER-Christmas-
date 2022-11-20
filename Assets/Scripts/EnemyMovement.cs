@@ -30,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         agent.destination = PlayerManager.Instance.transform.position;
     }
