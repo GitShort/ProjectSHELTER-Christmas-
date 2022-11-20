@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
             if (currentEnemyCount <= 0)
             {
                 Debug.Log("Wave cleared");
+                PlayerManager.Instance.AdjustPlayerHealth(+20, null);
                 isWaveStarted = false;
                 StartCoroutine(StartWave());
             }
