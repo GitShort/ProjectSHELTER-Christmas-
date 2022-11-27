@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(InputHandler))]
 public class PlayerManager : MonoBehaviour
@@ -25,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float projectileSpeed = 15f;
     [SerializeField] float shootingTimer = 0.125f;
     bool shotFired = false;
+
+    [SerializeField] VisualEffect shootVFX;
 
     [SerializeField] float playerHealth = 100f;
     float currentPlayerHealth;
@@ -130,10 +133,11 @@ public class PlayerManager : MonoBehaviour
         {
             targetVector = Quaternion.Euler(0, Camera.gameObject.transform.rotation.eulerAngles.y, 0) * targetVector;
             var targetPosition = transform.position + targetVector * speed;
+            targetVector = Vector3.Normalize(targetVector);
             transform.position = targetPosition;
         }
 
-        targetVector = Vector3.Normalize(targetVector);
+
 
         return targetVector;
     }
@@ -148,6 +152,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator TimeBetweenShots()
     {
         shotFired = true;
+        shootVFX.Play();
         var shot = Instantiate(projectile, shootingPos.position, transform.rotation);
         shot.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.up * projectileSpeed, ForceMode.Impulse);
         yield return new WaitForSeconds(shootingTimer);
