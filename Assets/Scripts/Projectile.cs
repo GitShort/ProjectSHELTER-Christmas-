@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
 
     VisualEffect projectileVFX;
 
+    [SerializeField] AudioClip projectileSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,7 @@ public class Projectile : MonoBehaviour
         {
             PlayerManager.Instance.AdjustPlayerHealth(-projectileDamage * 10f, this.transform);
         }
+        //AudioSource.PlayClipAtPoint(projectileSound, this.transform.position, 1f);
 
         GameObject explosion = Instantiate(projectileExplosion, transform.position, transform.rotation);
         explosion.GetComponentInChildren<VisualEffect>().Play();

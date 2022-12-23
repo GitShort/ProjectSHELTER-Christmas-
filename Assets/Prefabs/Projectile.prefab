@@ -69,6 +69,7 @@ MonoBehaviour:
   VFXOffset: 0.08
   projectileDamage: 1
   projectileType: PlayerProjectile
+  projectileSound: {fileID: 8300000, guid: 930fc8adc6cc31247bad4cef19d9f3d2, type: 3}
 --- !u!135 &1194437023542081239
 SphereCollider:
   m_ObjectHideFlags: 0

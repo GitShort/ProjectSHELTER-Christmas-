@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float staggerTime = 0.125f;
     [SerializeField] float staggerSpeed = 0.25f;
     bool wasHit = false;
+    [SerializeField] AudioClip[] splatSounds;
 
     //enum enemyType { Generic, Ranged, Fast, Tank};
     //[SerializeField] enemyType type;
@@ -43,9 +44,10 @@ public class EnemyMovement : MonoBehaviour
             StartCoroutine(GetHit());
         if (currentEnemyHealth <= 0)
         {
+            AudioSource.PlayClipAtPoint(splatSounds[Random.Range(0, splatSounds.Length)], this.transform.position, 1f);
             GameManager.Instance.CurrentEnemyCount--;
             GameManager.Instance.KilledEnemyCount++;
-            GameManager.Instance.UpdateUI();
+            GameManager.Instance.UpdateUI(true);
 
             GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
             explosion.GetComponentInChildren<VisualEffect>().Play();
@@ -55,9 +57,14 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    //private void OnCollisionEnter(Collision collision)
+    //{
+
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag.Equals("Player"))
+        if (other.gameObject.tag.Equals("Player"))
         {
             PlayerManager.Instance.AdjustPlayerHealth(-damageToPlayer, this.transform);
         }

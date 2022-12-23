@@ -13,13 +13,20 @@ public class GameManager : MonoBehaviour
     int spawnedEnemyCount;
     int currentEnemyCount;
 
-    [SerializeField] float timeBetweenWaves = 5f;
+    [SerializeField] float timeBetweenWavesSet = 5f;
+    [SerializeField] float startingTime = 15f;
+    float timeBetweenWavesUse = 0f;
+    float timeBeforeWave = 0f;
+    bool timerOn = false;
     int currentWave;
 
     bool isWaveStarted = true;
 
     [SerializeField] TextMeshProUGUI playerHealth;
     [SerializeField] TextMeshProUGUI score;
+    [SerializeField] TextMeshProUGUI enemiesLeft;
+    [SerializeField] TextMeshProUGUI timeBeforeWaveUI;
+    [SerializeField] TextMeshProUGUI nextWaveInTEXT;
 
     public int CurrentEnemyCount
     {
@@ -47,6 +54,11 @@ public class GameManager : MonoBehaviour
         set { killedEnemyCount = value; }
     }
 
+    public int GetCurrentWave
+    {
+        get { return currentWave; }
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -62,7 +74,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        timeBeforeWave = startingTime;
+        timeBetweenWavesUse = startingTime;
     }
 
     // Update is called once per frame
@@ -73,8 +86,8 @@ public class GameManager : MonoBehaviour
             if (currentEnemyCount <= 0)
             {
                 Debug.Log("Wave cleared");
-                PlayerManager.Instance.AdjustPlayerHealth(+20, null);
                 isWaveStarted = false;
+                timerOn = true;
                 StartCoroutine(StartWave());
             }
         }
@@ -84,27 +97,65 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(0);
             Time.timeScale = 1;
         }
+        DisplayTimeBeforeWave();
     }
 
     IEnumerator StartWave()
     {
-        yield return new WaitForSeconds(timeBetweenWaves);
+        
+        yield return new WaitForSeconds(timeBetweenWavesUse);
         ResetWaveValues();
         Debug.Log("New wave began");
+    }
+    
+    void DisplayTimeBeforeWave()
+    {
+        if (timerOn)
+        {
+            if (timeBeforeWave > 1)
+            {
+                if (!nextWaveInTEXT.gameObject.activeInHierarchy)
+                    nextWaveInTEXT.gameObject.SetActive(true);
+                timeBeforeWave -= Time.deltaTime;
+                timeBeforeWaveUI.text = Mathf.RoundToInt(timeBeforeWave).ToString();
+            }
+            else
+            {
+                timeBeforeWaveUI.text = "";
+                nextWaveInTEXT.gameObject.SetActive(false);
+                if (timeBetweenWavesUse != timeBetweenWavesSet)
+                    timeBetweenWavesUse = timeBetweenWavesSet;
+                timeBeforeWave = timeBetweenWavesUse;
+                timerOn = false;
+            }
+        }
     }
 
     void ResetWaveValues()
     {
         isWaveStarted = true;
+        currentWave++;
+        Debug.Log("CURRENT WAVE: " + currentWave);
         spawnedEnemyCount = 0;
         currentEnemyCount = 0;
-        targetEnemyCount = 150;
+        if (currentWave == 4)
+            targetEnemyCount -= 15;
+        else if (currentWave == 8)
+            targetEnemyCount -= 30;
+        else if (currentWave == 12)
+            targetEnemyCount -= 30;
+        TargetEnemyCount += 8;
     }
 
-    public void UpdateUI()
+    public void UpdateUI(bool isScore)
     {
         playerHealth.text = PlayerManager.Instance.CurrentPlayerHealth.ToString();
-        score.text = killedEnemyCount.ToString();
+        if (isScore)
+        {
+            score.gameObject.GetComponent<Animator>().Play("UIUpdate");
+            score.text = killedEnemyCount.ToString();
+        }
+        //enemiesLeft.text = currentEnemyCount.ToString();
     }
 
 }

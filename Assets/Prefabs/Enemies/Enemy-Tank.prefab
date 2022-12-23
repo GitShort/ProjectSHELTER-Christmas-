@@ -96,7 +96,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6086438895594295839}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.8
   m_Height: 2
@@ -158,6 +158,9 @@ MonoBehaviour:
   damageToPlayer: 20
   staggerTime: 0.5
   staggerSpeed: 2
+  splatSounds:
+  - {fileID: 8300000, guid: 9dd51cbc0126f7a4dadae65c5fb0830f, type: 3}
+  - {fileID: 8300000, guid: ec6e79c15506bd34b98cb456d76369c6, type: 3}
 --- !u!1 &7956226809865882533
 GameObject:
   m_ObjectHideFlags: 0

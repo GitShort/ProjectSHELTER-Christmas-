@@ -24,11 +24,12 @@ public class EnemySpawner : MonoBehaviour
         _SpawnPointsSize = new Vector3[_SpawnPoints.Length];
         _SpawnPointsCenter = new Vector3[_SpawnPoints.Length];
         CheckSpawnPositions();
+        GameManager.Instance.SpawnedEnemyCount = GameManager.Instance.TargetEnemyCount;
     }
 
     void Update()
     {
-        if (GameManager.Instance.SpawnedEnemyCount <= GameManager.Instance.TargetEnemyCount)
+        if (GameManager.Instance.SpawnedEnemyCount < GameManager.Instance.TargetEnemyCount)
             foreach (var spawnPoint in _SpawnPoints)
             {
                 if (!spawnPoint.gameObject.GetComponent<Renderer>().isVisible)
@@ -67,7 +68,14 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemies()
     {
-        _spawnCount = rnd.Next(Enemies.Length) + 1;
+        if (GameManager.Instance.GetCurrentWave >= 12)
+            _spawnCount = rnd.Next(Enemies.Length) + 1;
+        else if (GameManager.Instance.GetCurrentWave >= 8)
+            _spawnCount = rnd.Next(Enemies.Length);
+        else if (GameManager.Instance.GetCurrentWave >= 4)
+            _spawnCount = rnd.Next(Enemies.Length) - 1;
+        else
+            _spawnCount = 1;
         for (int i = 0; i < _spawnCount; i++)
         {
             _chosenSpawnPoint = rnd.Next(_SpawnPoints.Length);

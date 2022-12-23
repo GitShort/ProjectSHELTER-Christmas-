@@ -20,6 +20,7 @@ public class KnockbackFeedback : MonoBehaviour
         Debug.Log("KNOCKBACK");
         Vector3 dir = (transform.position - sender.position).normalized;
         rb.AddForce(dir * strength, ForceMode.Impulse);
+
         //StartCoroutine(Reset(rb.velocity));
     }
 
