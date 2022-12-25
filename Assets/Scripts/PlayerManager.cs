@@ -46,6 +46,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] AudioClip gunFire;
     [SerializeField] LayerMask mouseHitLayer;
 
+    [Header("PowerMode")] [SerializeField] float powerHealth = 500f;
+    [SerializeField] float powerFireRate = 0.25f;
+    [SerializeField] float powerWalkSpeed = 1.5f;
+
     public bool PlayerHit
     {
         get { return playerHit; }
@@ -215,5 +219,57 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         playerFrozen = false;
     }
+
+    #region Buffs
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Buff"))
+        {
+            PlayerBuff pBuff = other.gameObject.GetComponent<PlayerBuff>();
+            switch (pBuff.Buff)
+            {
+                case PlayerBuff.BuffType.FireRate:
+                    shootingTimer -= pBuff.Value;
+                    Debug.Log("Fire Rate increased");
+                    break;
+                case PlayerBuff.BuffType.Movement:
+                    _walkSpeed += pBuff.Value;
+                    Debug.Log("Movement increased");
+                    break;
+                case PlayerBuff.BuffType.Health:
+                    Debug.Log("Fire Rate health");
+                    AdjustPlayerHealth(pBuff.Value, null);
+                    break;
+                case PlayerBuff.BuffType.Power:
+                    Debug.Log("POWAAAH");
+                    StartCoroutine(PowerMode(pBuff.Value));
+                    break;
+                default:
+                    break;
+            }
+            
+            Destroy(other.gameObject);
+        }
+    }
+
+    IEnumerator PowerMode(float duration)
+    {
+        float tempHealth = currentPlayerHealth;
+        float tempFireRate = shootingTimer;
+        float tempWalkSpeed = _walkSpeed;
+
+        AdjustPlayerHealth(powerHealth, null);
+        shootingTimer = powerFireRate;
+        _walkSpeed = powerWalkSpeed;
+        yield return new WaitForSeconds(duration);
+
+        currentPlayerHealth = tempHealth;
+        shootingTimer = tempFireRate;
+        _walkSpeed = tempWalkSpeed;
+        GameManager.Instance.UpdateUI(false);
+    }
+
+    #endregion
 
 }

@@ -22,6 +22,8 @@ public class EnemyMovement : MonoBehaviour
     //enum enemyType { Generic, Ranged, Fast, Tank};
     //[SerializeField] enemyType type;
 
+    [SerializeField] GameObject[] buffDrops;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,6 @@ public class EnemyMovement : MonoBehaviour
 
     public void EnemyHit(float damage)
     {
-        Debug.Log("Damage");
         currentEnemyHealth = currentEnemyHealth - damage;
         if (!wasHit)
             StartCoroutine(GetHit());
@@ -52,6 +53,17 @@ public class EnemyMovement : MonoBehaviour
             GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
             explosion.GetComponentInChildren<VisualEffect>().Play();
             //AudioManager.instance.PlaySound("ProjectileExplode", explosion);
+
+            var buffDropChance = Random.Range(0, 100);
+            if (buffDropChance < 5)
+            {
+                GameObject buff = Instantiate(buffDrops[3], transform.position, Quaternion.identity);
+            }
+            else if (buffDropChance < 15)
+            {
+                GameObject buff = Instantiate(buffDrops[Random.Range(0, buffDrops.Length - 1)], transform.position, Quaternion.identity);
+            }
+
             Destroy(explosion, 4f);
             Destroy(this.gameObject);
         }

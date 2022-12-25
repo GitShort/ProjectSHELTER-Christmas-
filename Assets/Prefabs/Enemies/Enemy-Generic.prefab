@@ -161,6 +161,11 @@ MonoBehaviour:
   splatSounds:
   - {fileID: 8300000, guid: 9dd51cbc0126f7a4dadae65c5fb0830f, type: 3}
   - {fileID: 8300000, guid: ec6e79c15506bd34b98cb456d76369c6, type: 3}
+  buffDrops:
+  - {fileID: 251066468282248093, guid: b365d596e6fcd6b48a5d803ff744cac0, type: 3}
+  - {fileID: 4652618059501347984, guid: c16a9e68bf482054fa6be2389f1ad983, type: 3}
+  - {fileID: 6855674972527206017, guid: 1755d08097adcb147a597d0e9022c394, type: 3}
+  - {fileID: 4592718662718748273, guid: e7df142a070336c4c94df4c18dbce522, type: 3}
 --- !u!1 &581168486817584704
 GameObject:
   m_ObjectHideFlags: 0

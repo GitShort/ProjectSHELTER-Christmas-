@@ -24,6 +24,10 @@ public class EnemySpawner : MonoBehaviour
         _SpawnPointsSize = new Vector3[_SpawnPoints.Length];
         _SpawnPointsCenter = new Vector3[_SpawnPoints.Length];
         CheckSpawnPositions();
+    }
+
+    private void Start()
+    {
         GameManager.Instance.SpawnedEnemyCount = GameManager.Instance.TargetEnemyCount;
     }
 
