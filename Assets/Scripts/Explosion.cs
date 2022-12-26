@@ -8,6 +8,8 @@ public class Explosion : MonoBehaviour
     [SerializeField] float damageToPlayer;
     [SerializeField] float explosionTime;
 
+    [SerializeField] bool effectPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class Explosion : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyMovement>().EnemyHit(damageToEnemies);
         }
-        if (other.gameObject.tag.Equals("Player"))
+        if (other.gameObject.tag.Equals("Player") && effectPlayer)
         {
             PlayerManager.Instance.AdjustPlayerHealth(-damageToPlayer, this.transform);
         }

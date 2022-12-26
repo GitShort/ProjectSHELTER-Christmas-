@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerBuff : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerBuff : MonoBehaviour
     [SerializeField] BuffType buff;
 
     [SerializeField] float value;
+    [SerializeField] GameObject destroyVFX;
 
     public BuffType Buff
     {
@@ -26,12 +28,11 @@ public class PlayerBuff : MonoBehaviour
         get { return value; }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnDestroy()
     {
-        if(other.gameObject.tag.Equals("Player"))
-        {
-            
-        }
+        GameObject buffVfx = Instantiate(destroyVFX, transform.position, Quaternion.identity);
+        buffVfx.GetComponentInChildren<VisualEffect>().Play();
+        Destroy(buffVfx, 3f);
     }
 
 }

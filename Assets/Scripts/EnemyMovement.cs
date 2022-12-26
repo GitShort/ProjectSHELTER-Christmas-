@@ -55,13 +55,13 @@ public class EnemyMovement : MonoBehaviour
             //AudioManager.instance.PlaySound("ProjectileExplode", explosion);
 
             var buffDropChance = Random.Range(0, 100);
-            if (buffDropChance < 5)
+            if (buffDropChance < 2)
             {
                 GameObject buff = Instantiate(buffDrops[3], transform.position, Quaternion.identity);
             }
-            else if (buffDropChance < 15)
+            else if (buffDropChance < 10 && buffDropChance > 2)
             {
-                GameObject buff = Instantiate(buffDrops[Random.Range(0, buffDrops.Length - 1)], transform.position, Quaternion.identity);
+                GameObject buff = Instantiate(buffDrops[Random.Range(0, 3)], transform.position, Quaternion.identity);
             }
 
             Destroy(explosion, 4f);

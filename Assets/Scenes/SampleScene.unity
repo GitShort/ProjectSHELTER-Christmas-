@@ -1233,8 +1233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEnemyCount: 10
-  timeBetweenWavesSet: 5
-  startingTime: 15
+  timeBetweenWavesSet: 1
+  startingTime: 1
   playerHealth: {fileID: 1659145886}
   score: {fileID: 1359220654}
   enemiesLeft: {fileID: 402874151}
@@ -5532,12 +5532,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 513834631978148865, guid: ec8e6d1de35d1794395274a45dfe3959,
     type: 3}
   m_PrefabInstance: {fileID: 465139824}
-  m_PrefabAsset: {fileID: 0}
---- !u!2083052967 &468541793 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 468541793, guid: 278e29cdefa16704c883283f1755b191,
-    type: 3}
-  m_PrefabInstance: {fileID: 6131540877434276433}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &475476405
 PrefabInstance:
@@ -21349,7 +21343,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 12a9e10960d8d064aa3c319f8c13f0f3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e0b6d4f83c4bf744aafa2983e4b0c3a4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
@@ -24768,25 +24762,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1409260886, guid: 278e29cdefa16704c883283f1755b191, type: 3}
-      propertyPath: delay
-      value: 1
+    - target: {fileID: 1717505082230234228, guid: 278e29cdefa16704c883283f1755b191,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1409260886, guid: 278e29cdefa16704c883283f1755b191, type: 3}
-      propertyPath: strength
-      value: 500
+    - target: {fileID: 1717505082230234228, guid: 278e29cdefa16704c883283f1755b191,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3862128001640016235, guid: 278e29cdefa16704c883283f1755b191,
+        type: 3}
+      propertyPath: m_Asset
+      value: 
+      objectReference: {fileID: 8926484042661614526, guid: 3f4d9bf0537d7354394349212012a2cd,
+        type: 3}
     - target: {fileID: 6131540878629710290, guid: 278e29cdefa16704c883283f1755b191,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6131540878629710292, guid: 278e29cdefa16704c883283f1755b191,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: d0b20c6b29749264eba8b2958682424a,
-        type: 2}
     - target: {fileID: 6131540878629710297, guid: 278e29cdefa16704c883283f1755b191,
         type: 3}
       propertyPath: m_RootOrder
@@ -24847,45 +24843,10 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 330585545}
-    - target: {fileID: 6131540878629710299, guid: 278e29cdefa16704c883283f1755b191,
+    - target: {fileID: 8726115735984611392, guid: 278e29cdefa16704c883283f1755b191,
         type: 3}
-      propertyPath: gunFire
-      value: 
-      objectReference: {fileID: 8300000, guid: abf52879180a00e4687c14efc2007873, type: 3}
-    - target: {fileID: 6131540878629710299, guid: 278e29cdefa16704c883283f1755b191,
-        type: 3}
-      propertyPath: shootVFX
-      value: 
-      objectReference: {fileID: 468541793}
-    - target: {fileID: 6131540878629710299, guid: 278e29cdefa16704c883283f1755b191,
-        type: 3}
-      propertyPath: _walkSpeed
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6131540878629710299, guid: 278e29cdefa16704c883283f1755b191,
-        type: 3}
-      propertyPath: powerFireRate
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6131540878629710299, guid: 278e29cdefa16704c883283f1755b191,
-        type: 3}
-      propertyPath: shootingTimer
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6131540878629710299, guid: 278e29cdefa16704c883283f1755b191,
-        type: 3}
-      propertyPath: powerWalkSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6131540878629710299, guid: 278e29cdefa16704c883283f1755b191,
-        type: 3}
-      propertyPath: buffLayer.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
-    - target: {fileID: 6131540878629710299, guid: 278e29cdefa16704c883283f1755b191,
-        type: 3}
-      propertyPath: mouseHitLayer.m_Bits
-      value: 1024
+      propertyPath: m_Name
+      value: VFX_GodModeSplat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 278e29cdefa16704c883283f1755b191, type: 3}

@@ -26,7 +26,7 @@ public class PlayerManager : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField] GameObject projectile;
-    [SerializeField] Transform shootingPos;
+    [SerializeField] Transform[] shootingPos;
     [SerializeField] float projectileSpeed = 15f;
     [SerializeField] float shootingTimer = 0.125f;
     bool shotFired = false;
@@ -49,6 +49,8 @@ public class PlayerManager : MonoBehaviour
     [Header("PowerMode")] [SerializeField] float powerHealth = 500f;
     [SerializeField] float powerFireRate = 0.25f;
     [SerializeField] float powerWalkSpeed = 1.5f;
+    [SerializeField] GameObject powerModeVFX;
+    bool powerModeOn = false;
 
     public bool PlayerHit
     {
@@ -177,8 +179,15 @@ public class PlayerManager : MonoBehaviour
         shotFired = true;
         AudioSource.PlayClipAtPoint(gunFire, this.transform.position, 2f);
         shootVFX.Play();
-        var shot = Instantiate(projectile, shootingPos.position, transform.rotation);
+        var shot = Instantiate(projectile, shootingPos[0].position, transform.rotation);
         shot.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.up * projectileSpeed, ForceMode.Impulse);
+        if (powerModeOn)
+        {
+            var shot2 = Instantiate(projectile, shootingPos[1].position, shootingPos[1].rotation);
+            shot2.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.up * projectileSpeed, ForceMode.Impulse);
+            var shot3 = Instantiate(projectile, shootingPos[2].position, shootingPos[2].rotation);
+            shot3.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.up * projectileSpeed, ForceMode.Impulse);
+        }
         yield return new WaitForSeconds(shootingTimer);
         shotFired = false;
     }
@@ -192,7 +201,8 @@ public class PlayerManager : MonoBehaviour
             {
                 //Vector3 moveDir = rb.transform.position - objPosition.position;
                 //rb.AddForce(moveDir.normalized * 100f, ForceMode.Impulse);
-                knockback.PlayFeedback(objPosition);
+                if (!powerModeOn)
+                    knockback.PlayFeedback(objPosition);
                 Debug.Log("PLAYER HIT for " + value + ", health = " + currentPlayerHealth);
                 StartCoroutine(TimeBetweenHits());
                 StartCoroutine(FreezeTimeBetweenHits());
@@ -239,11 +249,21 @@ public class PlayerManager : MonoBehaviour
                     break;
                 case PlayerBuff.BuffType.Health:
                     Debug.Log("Fire Rate health");
-                    AdjustPlayerHealth(pBuff.Value, null);
+                    if(!powerModeOn)
+                        if (currentPlayerHealth <= 80)
+                        {
+                            AdjustPlayerHealth(pBuff.Value, null);
+                        }
+                        else if (currentPlayerHealth < 100)
+                        {
+                            currentPlayerHealth = 100f;
+                            GameManager.Instance.UpdateUI(false);
+                        }
                     break;
                 case PlayerBuff.BuffType.Power:
                     Debug.Log("POWAAAH");
-                    StartCoroutine(PowerMode(pBuff.Value));
+                    if (!powerModeOn)
+                        StartCoroutine(PowerMode(pBuff.Value));
                     break;
                 default:
                     break;
@@ -262,8 +282,12 @@ public class PlayerManager : MonoBehaviour
         AdjustPlayerHealth(powerHealth, null);
         shootingTimer = powerFireRate;
         _walkSpeed = powerWalkSpeed;
+        powerModeOn = true;
+        GameObject powerModeVFXGo = Instantiate(powerModeVFX, transform.position, Quaternion.identity);
+        powerModeVFXGo.GetComponentInChildren<VisualEffect>().Play();
+        Destroy(powerModeVFXGo, 1.5f);
         yield return new WaitForSeconds(duration);
-
+        powerModeOn = false;
         currentPlayerHealth = tempHealth;
         shootingTimer = tempFireRate;
         _walkSpeed = tempWalkSpeed;

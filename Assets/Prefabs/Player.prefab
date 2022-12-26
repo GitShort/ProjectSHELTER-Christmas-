@@ -115,6 +115,37 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &100952078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 100952079}
+  m_Layer: 8
+  m_Name: ShootingPos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &100952079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100952078}
+  m_LocalRotation: {x: -0, y: 0.2588186, z: -0, w: 0.965926}
+  m_LocalPosition: {x: 0.93200004, y: -0.068, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6131540878629710297}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
 --- !u!1 &468541790
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +256,37 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &609150836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 609150837}
+  m_Layer: 8
+  m_Name: ShootingPos (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &609150837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609150836}
+  m_LocalRotation: {x: -0, y: -0.25881857, z: -0, w: 0.965926}
+  m_LocalPosition: {x: 0.18200004, y: -0.068, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6131540878629710297}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: -30, z: 0}
 --- !u!1 &1729206176
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +930,8 @@ Transform:
   - {fileID: 716685467108996671}
   - {fileID: 1729206177}
   - {fileID: 468541791}
+  - {fileID: 100952079}
+  - {fileID: 609150837}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -928,7 +992,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6131540878629710290}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d0b20c6b29749264eba8b2958682424a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -976,16 +1040,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotateTowardMouse: 1
-  MovementSpeed: 10
-  RotationSpeed: 90
   Camera: {fileID: 0}
   projectile: {fileID: 3208555782826603893, guid: 99d451ef8399a2d47a64988e79ad0fe8,
     type: 3}
-  shootingPos: {fileID: 6131540878088922469}
+  shootingPos:
+  - {fileID: 6131540878088922469}
+  - {fileID: 100952079}
+  - {fileID: 609150837}
   projectileSpeed: 50
-  shootingTimer: 0.125
+  shootingTimer: 0.5
+  shootVFX: {fileID: 468541793}
   playerHealth: 100
   hitsCooldown: 1.5
+  gunFire: {fileID: 8300000, guid: abf52879180a00e4687c14efc2007873, type: 3}
+  mouseHitLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  powerHealth: 500
+  powerFireRate: 0.05
+  powerWalkSpeed: 1.5
+  powerModeVFX: {fileID: 3768434051084694703, guid: 977d4d26f5bd13e4d8b26c1dd761b26f,
+    type: 3}
+  _walkSpeed: 9
+  _acceleration: 2
+  _maxWalkingPenalty: 0.5
+  _currentMovementLerpSpeed: 100
 --- !u!114 &1409260886
 MonoBehaviour:
   m_ObjectHideFlags: 0
