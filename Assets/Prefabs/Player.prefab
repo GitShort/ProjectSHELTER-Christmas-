@@ -1050,9 +1050,14 @@ MonoBehaviour:
   projectileSpeed: 50
   shootingTimer: 0.5
   shootVFX: {fileID: 468541793}
+  playerDeathSplat: {fileID: 1610329271963171850, guid: ad99f4056a3e11b4997bb6cbb4451722,
+    type: 3}
   playerHealth: 100
   hitsCooldown: 1.5
   gunFire: {fileID: 8300000, guid: abf52879180a00e4687c14efc2007873, type: 3}
+  playerHitSound: {fileID: 8300000, guid: 9481ae4ec56c23e4f88b09d5db7e32e9, type: 3}
+  playerPickupSound: {fileID: 8300000, guid: 10ff1bd06baecd34c82d3018fbbe9565, type: 3}
+  playerMesh: {fileID: 2509756572103494925}
   mouseHitLayer:
     serializedVersion: 2
     m_Bits: 1024

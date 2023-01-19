@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6645adf4b4d755644959e64e034dd34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 1
+  enemyHealth: 2
   deathVFX: {fileID: 2802266773793000470, guid: c74c808e8054b2845b5bd991fd245c9b,
     type: 3}
   damageToPlayer: 20

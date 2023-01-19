@@ -44,6 +44,11 @@ public class PlayerManager : MonoBehaviour
     KnockbackFeedback knockback;
 
     [SerializeField] AudioClip gunFire;
+    [SerializeField] AudioClip playerHitSound;
+    [SerializeField] AudioClip playerPickupSound;
+
+    [SerializeField] GameObject playerMesh;
+    
     [SerializeField] LayerMask mouseHitLayer;
 
     [Header("PowerMode")] [SerializeField] float powerHealth = 500f;
@@ -51,6 +56,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float powerWalkSpeed = 1.5f;
     [SerializeField] GameObject powerModeVFX;
     bool powerModeOn = false;
+
 
     public bool PlayerHit
     {
@@ -88,19 +94,22 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetMouseButton(0))
+        if (currentPlayerHealth > 0)
         {
-            ShootProjectile();
+            if (Input.GetMouseButton(0))
+            {
+                ShootProjectile();
+            }
+            GatherInputs();
+            if (!playerFrozen)
+                HandleWalking();
         }
-        GatherInputs();
-        if (!playerFrozen)
-        HandleWalking();
     }
 
     private void FixedUpdate()
     {
-        RotateFromMouseVector();
+        if (currentPlayerHealth > 0)
+            RotateFromMouseVector();
     }
 
     void ShootProjectile()
@@ -199,6 +208,7 @@ public class PlayerManager : MonoBehaviour
             currentPlayerHealth = currentPlayerHealth + value;
             if (value < 0)
             {
+                AudioSource.PlayClipAtPoint(playerHitSound, this.transform.position, 2f);
                 //Vector3 moveDir = rb.transform.position - objPosition.position;
                 //rb.AddForce(moveDir.normalized * 100f, ForceMode.Impulse);
                 if (!powerModeOn)
@@ -206,11 +216,6 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log("PLAYER HIT for " + value + ", health = " + currentPlayerHealth);
                 StartCoroutine(TimeBetweenHits());
                 StartCoroutine(FreezeTimeBetweenHits());
-            }
-            if (currentPlayerHealth <= 0)
-            {
-                Time.timeScale = 0;
-                Debug.Log("YOU LOSE");
             }
         }
         GameManager.Instance.UpdateUI(false);
@@ -268,7 +273,7 @@ public class PlayerManager : MonoBehaviour
                 default:
                     break;
             }
-            
+            AudioSource.PlayClipAtPoint(playerPickupSound, this.transform.position, 1f);
             Destroy(other.gameObject);
         }
     }

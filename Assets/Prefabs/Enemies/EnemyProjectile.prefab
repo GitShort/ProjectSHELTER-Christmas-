@@ -63,11 +63,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b410fe9fcb3ca4493d720f3e5e74be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileExplosion: {fileID: 8535184685384054959, guid: 451c452f94b953441a23c750c4044e95,
+  projectileExplosion: {fileID: 8535184685384054959, guid: fd284e19d83f1aa46a00ed2b8607882c,
     type: 3}
   VFXOffset: 0.08
   projectileDamage: 1
   projectileType: EnemyProjectile
+  projectileSound: {fileID: 8300000, guid: bfcdbed27ed439842a0176de5d48698c, type: 3}
 --- !u!135 &1194437023542081239
 SphereCollider:
   m_ObjectHideFlags: 0

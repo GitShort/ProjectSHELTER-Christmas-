@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI enemiesLeft;
     [SerializeField] TextMeshProUGUI timeBeforeWaveUI;
     [SerializeField] TextMeshProUGUI nextWaveInTEXT;
+    [SerializeField] Image deadImage;
+    AudioSource deathSound;
+    [SerializeField] AudioSource playerDeathSplatSound;
+    [SerializeField] GameObject playerDeathSplat;
 
     public int CurrentEnemyCount
     {
@@ -76,6 +81,7 @@ public class GameManager : MonoBehaviour
     {
         timeBeforeWave = startingTime;
         timeBetweenWavesUse = startingTime;
+        deathSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -92,10 +98,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(0);
-            Time.timeScale = 1;
+
+            deadImage.gameObject.SetActive(false);
         }
         DisplayTimeBeforeWave();
     }
@@ -150,12 +157,28 @@ public class GameManager : MonoBehaviour
     public void UpdateUI(bool isScore)
     {
         playerHealth.text = PlayerManager.Instance.CurrentPlayerHealth.ToString();
+        if (PlayerManager.Instance.CurrentPlayerHealth <= 0)
+        {
+            StartCoroutine(DeathScreen());
+            PlayerManager.Instance.gameObject.SetActive(false);
+            GameObject playerSplat = Instantiate(playerDeathSplat, PlayerManager.Instance.transform.position, transform.rotation);
+            playerDeathSplat.GetComponentInChildren<VisualEffect>().Play();
+            playerDeathSplatSound.Play();
+        }
+
         if (isScore)
         {
             score.gameObject.GetComponent<Animator>().Play("UIUpdate");
             score.text = killedEnemyCount.ToString();
         }
         //enemiesLeft.text = currentEnemyCount.ToString();
+    }
+
+    IEnumerator DeathScreen()
+    {
+        yield return new WaitForSeconds(2f);
+        deadImage.gameObject.SetActive(true);
+        deathSound.Play();
     }
 
 }

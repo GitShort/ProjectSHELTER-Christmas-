@@ -186,10 +186,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6645adf4b4d755644959e64e034dd34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 2
+  enemyHealth: 1
   deathVFX: {fileID: 3655864053516968002, guid: 65c0a0de2d954e64ea6b1c00ed9bfbe5,
     type: 3}
-  damageToPlayer: 20
+  damageToPlayer: 10
   staggerTime: 0.5
   staggerSpeed: 1.5
   splatSounds:
@@ -218,6 +218,7 @@ MonoBehaviour:
   projectileSpeed: 10
   shootingTimer: 0.5
   shootingDistanceMultiplier: 1.1
+  spellSound: {fileID: 8300000, guid: bfcdbed27ed439842a0176de5d48698c, type: 3}
 --- !u!1 &2584117808433950206
 GameObject:
   m_ObjectHideFlags: 0

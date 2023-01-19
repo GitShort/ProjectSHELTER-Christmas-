@@ -152,11 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6645adf4b4d755644959e64e034dd34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 2
+  enemyHealth: 5
   deathVFX: {fileID: 2802266773793000470, guid: 62d49111696c309498813d8485778461,
     type: 3}
   damageToPlayer: 20
-  staggerTime: 0.5
+  staggerTime: 1
   staggerSpeed: 2
   splatSounds:
   - {fileID: 8300000, guid: 9dd51cbc0126f7a4dadae65c5fb0830f, type: 3}

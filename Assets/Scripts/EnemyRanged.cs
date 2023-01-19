@@ -11,6 +11,8 @@ public class EnemyRanged : MonoBehaviour
     [SerializeField] float shootingTimer;
     [SerializeField] float shootingDistanceMultiplier = 1.1f;
 
+    [SerializeField] AudioClip spellSound;
+
     EnemyMovement enemyMovement;
 
     Animator anim;
@@ -48,7 +50,8 @@ public class EnemyRanged : MonoBehaviour
         shotFired = true;
         var shot = Instantiate(projectile, shootingPos.position, transform.rotation);
         shot.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.up * projectileSpeed, ForceMode.Impulse);
-
+        if (spellSound != null)
+            AudioSource.PlayClipAtPoint(spellSound, this.transform.position, 10f);
 
 
         yield return new WaitForSeconds(shootingTimer);
